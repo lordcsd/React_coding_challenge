@@ -1,14 +1,12 @@
 import { useContext, useState } from "react";
 import { RootContext } from "../contexts/rootContext";
-import { RootStateStruct } from "../dtos/rootState.dto";
+import { RootContextProps } from "../dtos/rootContextProps.dto";
 import { userSortParams } from "../dtos/userSortParams.dto";
 
 export default function Home() {
-  const { rootState, sortUsers, searchUsers } = useContext(RootContext) as {
-    rootState: RootStateStruct;
-    sortUsers: (options: userSortParams) => Promise<void>;
-    searchUsers: (queryString: string) => Promise<void>;
-  };
+  const { rootState, sortUsers, searchUsers, fetchUsers } = useContext(
+    RootContext
+  ) as RootContextProps;
 
   const { searchedUsers: users, isError, isLoading } = rootState;
 
@@ -80,6 +78,13 @@ export default function Home() {
             </select>
           </div>
         </div>
+      </div>
+
+      <div
+        className="h-20  bg-slate-900 fixed right-10 bottom-10 rounded flex items-center p-4"
+        onClick={fetchUsers}
+      >
+        <p className="text-white">Refresh Users</p>
       </div>
 
       {isLoading ? (

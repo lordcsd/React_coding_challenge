@@ -43,11 +43,9 @@ function App() {
           ? a.name.localeCompare(b.name)
           : a.username.localeCompare(b.username);
       }
-      if (direction === "desc") {
-        return sortBy === "name"
-          ? b.name.localeCompare(a.name)
-          : b.username.localeCompare(a.username);
-      }
+      return sortBy === "name"
+        ? b.name.localeCompare(a.name)
+        : b.username.localeCompare(a.username);
     });
     await setRootState({
       ...rootState,
@@ -76,7 +74,9 @@ function App() {
   };
 
   return (
-    <RootContext.Provider value={{ rootState, sortUsers, searchUsers }}>
+    <RootContext.Provider
+      value={{ rootState, sortUsers, searchUsers, fetchUsers }}
+    >
       <Home />
     </RootContext.Provider>
   );
